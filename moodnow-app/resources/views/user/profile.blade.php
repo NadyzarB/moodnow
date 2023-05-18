@@ -1,76 +1,118 @@
 @extends('layouts.master')
 
 @section('content')
-    <style>
-        .card{
-            margin-top: 8rem;
-            margin-bottom: 8rem;
-            height: 60vh;
-            width: 30vw;
-            box-shadow: 0 0 3px black;
-            justify-content: center;
-            align-items: center;
-        }
+<style>
+    .card{
+        margin-top: 4rem;
+        margin-bottom: 8rem;
+        height: 45vh;
+        width: 30vw;
+        box-shadow: 0 0 3px black;
+    }
 
-        .container{
-            display: flex;
-            justify-content: center;
-            align-content: center;
-        }
+    .row {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
-        .profile-pic {
-            width: 117px; /* adjust to desired size */
-            height: 117px; /* adjust to desired size */
-            border-radius: 50%; /* creates a circle */
-            overflow: hidden; /* clips the image to the circle */
-            border: 2px solid #ee0f0f; /* add border with color */
-            overflow: hidden; /* hide overflowing parts of the image */
-        }
+    .container{
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+    
+    .username {
+        font-size: 18px;
+        font-weight: 600;
+    }
 
-        .profile-pic img {
-            background-color: black;
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* maintains aspect ratio while filling the circle */
-        }
+    .username-control.form-control {
+        display: flex;
+        background: rgb(84, 44, 183);
+        background: linear-gradient(50deg, rgba(84, 44, 183, 1) 32%, rgba(98, 47, 223, 1) 100%);
+        color: #FFFFFF; /* Replace with your desired text color */
+        text-align: center;
+        border-radius: 4px;
+        border: none;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 1px 1px rgba(0, 0, 0, 0.15);
+        padding: 1rem;
+        width: 80%;
+        box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.199);
+    }
 
-        .username {
-            font-size: 18px;
-            font-weight: 600;
-        }
+    .username-control.form-control::placeholder {
+        color: #ffffff;
+        text-transform: uppercase;
+        font-weight: bolder;
+    }
+
+    .password {
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .password-control.form-control {
+        display: flex;
+        background: rgb(84, 44, 183);
+        background: linear-gradient(50deg, rgba(84, 44, 183, 1) 32%, rgba(98, 47, 223, 1) 100%);
+        color: #FFFFFF; /* Replace with your desired text color */
+        text-align: center;
+        border-radius: 4px;
+        border: none;
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 1px 1px rgba(0, 0, 0, 0.15);
+        padding: 1rem;
+        width: 80%;
+        box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.199);
+    }
+
+    .password-control.form-control::placeholder {
+        color: #ffffff;
+        text-transform: uppercase;
+        font-weight: bolder;
+    }
+
     </style>
 
     <!-- page title -->
-    <section class="page-title bg-primary position-relative">
-        <div class="container">
-          <div class="row">
-            <div class="col-12 text-center">
-              <h1 class="text-white font-tertiary">Profile</h1>
-            </div>
-          </div>
+  <section class="page-title bg-primary position-relative">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text-center">
+          <h1 class="text-white font-tertiary">Profile</h1>
         </div>
-        <!-- background shapes -->
-        <img src="{{ asset('landpage/images/illustrations/page-title.png') }}" alt="illustrations" class="bg-shape-1 w-100">
-        <img src="{{ asset('landpage/images/illustrations/leaf-pink-round.png') }}" alt="illustrations" class="bg-shape-2">
-        <img src="{{ asset('landpage/images/illustrations/dots-cyan.png') }}" alt="illustrations" class="bg-shape-3">
-        <img src="{{ asset('landpage/images/illustrations/leaf-orange.png" alt="illustrations') }}" class="bg-shape-4">
-        <img src="{{ asset('landpage/images/illustrations/leaf-yellow.png') }}" alt="illustrations" class="bg-shape-5">
-        <img src="{{ asset('landpage/images/illustrations/dots-group-cyan.png') }}" alt="illustrations" class="bg-shape-6">
-        <img src="{{ asset('landpage/images/illustrations/leaf-cyan-lg.png') }}" alt="illustrations" class="bg-shape-7">
-      </section>
-      <!-- /page title -->
+      </div>
+    </div>
+    <!-- background shapes -->
+    <img src="{{ asset('kroos/images/illustrations/page-title.png') }}" alt="illustrations" class="bg-shape-1 w-100">
+    <img src="{{ asset('kroos/images/illustrations/leaf-pink-round.png') }}" alt="illustrations" class="bg-shape-2">
+    <img src="{{ asset('kroos/images/illustrations/dots-cyan.png') }}" alt="illustrations" class="bg-shape-3">
+    <img src="{{ asset('kroos/images/illustrations/leaf-orange.png" alt="illustrations') }}" class="bg-shape-4">
+    <img src="{{ asset('kroos/images/illustrations/leaf-yellow.png') }}" alt="illustrations" class="bg-shape-5">
+    <img src="{{ asset('kroos/images/illustrations/dots-group-cyan.png') }}" alt="illustrations" class="bg-shape-6">
+    <img src="{{ asset('kroos/images/illustrations/leaf-cyan-lg.png') }}" alt="illustrations" class="bg-shape-7">
+  </section>
+  <!-- /page title -->
 
       {{-- User Profile --}}
       <div class="container">
-        <div class="card">
+        <div class="card mb-2">
             <div class="card-body">
                 <div class="row">
-                    <div class="profile-pic">
-                        <img src="landpage/images/testimonial/client-1.png" alt="Profile photo">
-                      </div>
+                    <p class="username">username</p>
                 </div>
                 <div class="row">
-                    <p class="username">username</p>
+                    <input type="text" class="form-control username-control" placeholder="name/example" disabled>
+                </div>
+                <div class="row">
+                    <p class="password">password</p>
+                </div>
+                <div class="row mb-4">
+                    <input type="text" class="form-control password-control" placeholder="name/example" disabled>
+                </div>
+                <div class="row">
+                    <a class="btn btn-primary" type="submit">EDIT</a>
                 </div>
             </div>
         </div>

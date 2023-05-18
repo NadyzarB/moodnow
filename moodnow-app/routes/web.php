@@ -30,6 +30,7 @@ Route::group(['middleware' => 'role:admin|sobat-moodnow|operator|user'], functio
     Route::post('/detect/quiz/proses', [App\Http\Controllers\User\DetectController::class, 'prosesQuiz'])->name('user.detect.prosesQuiz');
     Route::get('/detect/result', [App\Http\Controllers\User\DetectController::class, 'result'])->name('user.detect.result');
     // Route::get('/detect/color', [App\Http\Controllers\User\DetectController::class, 'detectColor'])->name('user.detect.detectColor');
+    Route::get('/detect/face', [App\Http\Controllers\User\DetectController::class, 'detectFace'])->name('user.detect.detectFace');
 
     // result
     Route::get('/result', [App\Http\Controllers\User\ResultController::class, 'index'])->name('user.result');
@@ -40,6 +41,7 @@ Route::group(['middleware' => 'role:admin|sobat-moodnow|operator|user'], functio
 
     // user
     Route::get('/profile', [App\Http\Controllers\User\ProfileController::class, 'index'])->name('profile');
+
 });
 
 Route::group(['middleware' => 'role:admin|sobat-moodnow|operator'], function(){

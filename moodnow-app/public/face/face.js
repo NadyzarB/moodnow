@@ -43,19 +43,6 @@ async function detect() {
     faceapi.draw.drawDetections(canvas, detectionsForSize);
     faceapi.draw.drawFaceLandmarks(canvas, detectionsForSize);
     faceapi.draw.drawFaceExpressions(canvas, detectionsForSize);
-    // const detectionsWithLandmarks = await faceapi
-    //   .detectAllFaces(video)
-    //   .withFaceLandmarks()
-
-    // console.log(detectionsWithLandmarks);
-
-    // const detectionsWithLandmarksForSize = faceapi.resizeResults(detectionsWithLandmarks, { width: displaySize.width, height: displaySize.height })
-
-    // const canvas = document.getElementById('overlay')
-    // canvas.width = displaySize.width
-    // canvas.height = displaySize.height
-
-    // faceapi.drawLandmarks(canvas, detectionsWithLandmarksForSize, { drawLines: true })
 }
 
 video.addEventListener("loadedmetadata", () => {

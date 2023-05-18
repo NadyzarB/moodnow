@@ -90,8 +90,7 @@
                                     <i class="fa fa-gauge"></i> &nbsp;&nbsp;Dashboard
                                 </a>
                                 @endcan
-                                <a class="dropdown-item nav-link text-dark" href="{{ route('profile') }}">Profile</a>
-                                <a href="#" class="dropdown-item nav-link text-dark">
+                                <a href="{{ route('profile') }}" class="dropdown-item nav-link text-dark">
                                     <i class="fas fa-cog"></i> &nbsp;&nbsp;Settings
                                 </a>
                                 <a href="{{ route('logout') }}" class="dropdown-item nav-link text-danger"

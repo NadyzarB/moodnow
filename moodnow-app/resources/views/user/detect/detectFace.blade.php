@@ -59,9 +59,9 @@
     </section>
 
     <!-- Main Script -->
-    <script src="face/js/script.js'"></script>
-    <script src="face/face-api.min.js'"></script>
-    <script src="face/face.js'"></script>
+    <script src="{{ asset('face/js/script.js') }}"></script>
+    <script src="{{ asset('face/face-api.min.js') }}"></script>
+    <script src="{{ asset('face/face.js') }}"></script>
 
     {{-- <!-- Addition Script -->    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
