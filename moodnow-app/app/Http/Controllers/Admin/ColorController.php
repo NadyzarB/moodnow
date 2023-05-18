@@ -4,10 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Color;
+use App\Models\Questionnaire;
 use Illuminate\Http\Request;
 
 class ColorController extends Controller
 {
+    /**
+     * __construct
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware(['permission:colors.index|colors.create|colors.edit|colors.delete']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +28,7 @@ class ColorController extends Controller
     {
         $colors = Color::latest()->when(request()->q, function($colors) {
             $colors = $colors->where('name', 'like', '%'. request()->q . '%');
-        })->paginate(10);
+        })->paginate(5);
 
         return view('admin.color.index', compact('colors'));
     }
@@ -29,39 +40,42 @@ class ColorController extends Controller
      */
     public function create()
     {
-        return view('admin.color.create');
+        $quizs = Questionnaire::latest()->get();
+        return view('admin.color.create', compact('quizs'));
     }
 
-     /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Questionnaire $quiz)
     {
         $this->validate($request, [
             'name' => 'required','unique:colors',
             'hex' => 'required', 
-            'output' => 'required'
         ]);
 
+        $quiz = Questionnaire::findOrFail($request->input('quiz_id'));
         $color = Color::create([
             'name' => $request->input('name'),
             'hex' => $request->input('hex'),
-            'output' => $request->input('output')
+            'quiz_id' => $quiz->id,
+            'mood' => $quiz->mood,
+            'output' => $quiz->output
         ]);
-            
+
         if($color) {
             //redirect dengan pesan sukses
-            return redirect()->route('admin.color.index')->with(['success' => 'Warna Berhasil Disimpan!']);
+            return redirect()->route('admin.color.index')->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
             //redirect dengan pesan error
-            return redirect()->route('admin.color.index')->with(['error' => 'Warnz Gagal Disimpan!']);
+            return redirect()->route('admin.color.index')->with(['error' => 'Data Gagal Disimpan!']);
         }
     }
 
-     /**
+    /**
      * Show the form for editing the specified resource.
      *
      * @param int $id
@@ -69,7 +83,8 @@ class ColorController extends Controller
      */
     public function edit(Color $color)
     {
-        return view('admin.color.edit', compact('color'));
+        $quizs = Questionnaire::latest()->get();
+        return view('admin.color.edit', compact('color', 'quizs'));
     }
 
     /**
@@ -84,22 +99,20 @@ class ColorController extends Controller
         $this->validate($request, [
             'name' => 'required','unique:colors'.$color->id,
             'hex' => 'required', 
-            'output' => 'required'
         ]);
 
         $color = Color::findOrFail($color->id);
         $color->update([
             'name' => $request->input('name'),
             'hex' => $request->input('hex'),
-            'output' => $request->input('output')
         ]);
                 
         if($color){
             //redirect dengan pesan sukses
-            return redirect()->route('admin.color.index')->with(['success' => 'Warna Berhasil Diupdate!']);
+            return redirect()->route('admin.color.index')->with(['success' => 'Data Berhasil Diupdate!']);
         }else{
             //redirect dengan pesan error
-            return redirect()->route('admin.color.index')->with(['error' => 'Warna Gagal Diupdate!']);
+            return redirect()->route('admin.color.index')->with(['error' => 'Data Gagal Diupdate!']);
         }
     }
 

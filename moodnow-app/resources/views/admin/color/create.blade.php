@@ -1,5 +1,4 @@
-@extends('layouts.dashboard')
-@section('title', 'Color Managed')
+@extends('layouts.app')
 
 @section('content')
     <section class="section">
@@ -15,11 +14,26 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('admin.color.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.color.store') }}" method="POST">
                         @csrf
 
                         <div class="form-group">
-                            <label>NAME</label>
+                            <label>MOOD</label>
+                            <select class="form-control select-mood @error('mood') is-invalid @enderror" name="quiz_id">
+                                <option value="">--</option>
+                                @foreach ($quizs as $quiz)
+                                    <option value="{{ $quiz->id }}">{{ $quiz->mood }}</option>
+                                @endforeach
+                            </select>
+                            @error('mood')
+                            <div class="invalid-feedback" style="display: block">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                        </div>
+
+                        <div class="form-group">
+                            <label>NAME COLOR</label>
                             <input type="text" name="name" value="{{ old('name') }}" placeholder="Masukkan Warna Baru"
                                 class="form-control @error('name') is-invalid @enderror">
 
@@ -31,23 +45,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label>HEX</label><br>
+                            <label>COLOR HEX</label><br>
                             <input type="color" name="hex" value="{{ old('hex') }}" placeholder="Masukkan Kode Warna"
                                 class="@error('hex') is-invalid @enderror">
 
                             @error('hex')
-                            <div class="invalid-feedback" style="display: block">
-                                {{ $message }}
-                            </div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label>OUTPUT</label>
-                            <input type="text" name="output" value="{{ old('output') }}" placeholder="Masukkan Output"
-                                class="form-control @error('output') is-invalid @enderror">
-
-                            @error('output')
                             <div class="invalid-feedback" style="display: block">
                                 {{ $message }}
                             </div>

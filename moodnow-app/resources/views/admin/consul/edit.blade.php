@@ -1,5 +1,4 @@
-@extends('layouts.dashboard')
-@section('title', 'Consultation')
+@extends('layouts.app')
 
 @section('content')
     <section class="section">
@@ -30,7 +29,7 @@
 
                         <div class="form-group">
                             <label>ANSWER</label>
-                            <input type="text" name="answer" value="{{ old('answer') }}" placeholder="Masukkan jawaban"
+                            <input type="text" name="answer" value="{{ old('answer', $consul->answer) }}" placeholder="Masukkan jawaban"
                                 class="form-control @error('answer') is-invalid @enderror">
 
                             @error('answer')
