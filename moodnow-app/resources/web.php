@@ -44,7 +44,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/detect', [DetectController::class, 'index'])->name('detect');
     Route::get('/consul-user', [ConsultationController::class, 'index'])->name('user.consul');
     Route::post('/consul-user', [ConsultationController::class, 'store'])->name('user.consul.store');
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile]');
 });
   
 /*------------------------------------------
